@@ -3,6 +3,7 @@ import FavouritesPage from "./pages/FavouritesPage";
 import ProfilePage from "./pages/ProfilePage";
 import RepoDetailPage from "./pages/RepoDetailPage";
 import SearchPage from "./pages/SearchPage";
+import Spinner from "./components/spinner";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
