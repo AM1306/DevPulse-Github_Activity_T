@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Spinner from "../components/spinner";
 import UserCard from "../components/userCard";
+import LanguageChart from "../components/languageChart";
 
 function ProfilePage() {
   const [profile, setProfile] = useState(null);
@@ -79,6 +80,7 @@ function ProfilePage() {
       {isLoading && <Spinner />}
       {error && <p className="error">{error}</p>}
       <UserCard profile={profile} />
+      <br />
       <div className="repoList">
         {repo.map((r) => (
           <div key={r.id}>
@@ -86,6 +88,7 @@ function ProfilePage() {
           </div>
         ))}
       </div>
+      <LanguageChart languages={languages} />
     </div>
   );
 }
