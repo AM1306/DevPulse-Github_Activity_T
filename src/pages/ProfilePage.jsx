@@ -24,6 +24,7 @@ function ProfilePage() {
           return;
         }
         const profileData = await profileRes.json();
+        console.log(profileData);
         setProfile(profileData);
 
         //Fetch repos
@@ -35,7 +36,7 @@ function ProfilePage() {
 
         //fetch languages for each repo and aggregate
         const top6 = reposData.slice(0, 6);
-        const langTotal ={};
+        const langTotal = {};
         for (const repo of top6) {
           const langRes = await fetch(
             `https://api.github.com/repos/${username}/${repo.name}/languages`,
