@@ -54,7 +54,7 @@ function SearchPage() {
 
       navigate(`/user/${username}`);
     } catch (error) {
-      setError("Something went wrong. Please try again.");
+      setError("Something went wrong. Please try again.", error);
     } finally {
       setIsLoading(false);
     }

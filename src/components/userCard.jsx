@@ -11,27 +11,27 @@ function UserCard({ profile }) {
       </div>
 
       <div className="profileName">
-        <h2>{profile.name}</h2>
+        <h2>Name: {profile.name}</h2>
       </div>
 
       <div className="profileBio">
-        <h2>{profile.bio}</h2>
+        <h2>Bio: {profile.bio}</h2>
       </div>
 
       <div className="profileLocation">
-        <h2>{profile.location}</h2>
+        <h2>Location: {profile.location}</h2>
       </div>
 
       <div className="profilefollowCount">
-        <h2>{profile.followers}</h2>
+        <h2>Followers: {profile.followers}</h2>
       </div>
 
       <div className="profileFollowing">
-        <h2>{profile.following}</h2>
+        <h2>Following: {profile.following}</h2>
       </div>
 
       <div className="profilePublicRepo">
-        <h2>{profile.public_repos}</h2>
+        <h2>Public Repositories: {profile.public_repos}</h2>
       </div>
 
       <div className="profileURL">
