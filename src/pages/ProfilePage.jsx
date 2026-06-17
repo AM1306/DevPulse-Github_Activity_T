@@ -10,7 +10,47 @@ function ProfilePage() {
   const [languages, setLanguages] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [fav, setFav] = useState(false);
   const { username } = useParams();
+
+  //Favourite Button
+  //Checking for localStorage when profile changes
+  useEffect(() => {
+    if (!profile) return;
+    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    const existingFav = favourites.find((user) => user.login === profile.login);
+
+    if (existingFav) {
+      setFav(true);
+    } else {
+      setFav(false);
+    }
+  }, [profile]);
+  function favPage() {
+    if (!profile) return;
+
+    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    const existingFavourite = favourites.find(
+      (user) => user.login === profile.login,
+    );
+    if (existingFavourite) {
+      //remove from favourites
+      const updatedFav = favourites.filter(
+        (user) => user.login !== profile.login,
+      );
+      localStorage.setItem("favourites", JSON.stringify(updatedFav));
+      setFav(false);
+    } else {
+      //Add to favourites
+      const newFav = {
+        login: profile.login,
+        avatar_url: profile.avatar_url,
+      };
+      const updatedFav = [...favourites, newFav];
+      localStorage.setItem("favourites", JSON.stringify(updatedFav));
+      setFav(true);
+    }
+  }
 
   useEffect(() => {
     async function fetchProfileData() {
@@ -73,10 +113,19 @@ function ProfilePage() {
     fetchProfileData();
   }, [username]);
 
+  const buttonText = fav ? "Favourite" : "Add to favourites";
   return (
     <div>
       <h1>ProfilePage</h1>
-      <Link to={`/user/${username}`}>Profile</Link>
+      <button
+        className="favPageBtn"
+        onClick={favPage}
+        style={{
+          backgroundColor: fav ? "gold" : "#ddd",
+        }}
+      >
+        {buttonText}
+      </button>
       {isLoading && <Spinner />}
       {error && <p className="error">{error}</p>}
       <UserCard profile={profile} />
