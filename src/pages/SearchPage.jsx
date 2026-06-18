@@ -63,7 +63,7 @@ function SearchPage() {
   return (
     <>
       <h1>SearchPage</h1>
-      <Link to="/">Search</Link>
+      <Link to="/favourites">Favourites</Link>
       <br />
 
       <div className="searchBar">
