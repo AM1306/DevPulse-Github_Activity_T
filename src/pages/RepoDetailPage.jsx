@@ -8,6 +8,7 @@ function RepoDetailPage() {
   const [repoDetails, setRepoDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [commits,setCommits]=useState([]);
 
   useEffect(() => {
     async function FetchRepoData() {
@@ -25,6 +26,18 @@ function RepoDetailPage() {
         const repoData = await repoRes.json();
         console.log(repoData);
         setRepoDetails(repoData);
+
+        //Last 5 commits
+        const commitsInfo=await fetch(`https://api.github.com/repos/${username}/${reponame}/commits`);
+        if(!commitsInfo.ok){
+          setError(`Response Error: ${commitsInfo.status}`);
+          return;
+        }
+        const commitsRes= await commitsInfo.json();
+        const commitsLast5=commitsRes.slice(0,5);
+        console.log(commitsLast5);
+        setCommits(commitsLast5);
+
       } catch (err) {
         console.error(err);
         setError("Something went wrong");
@@ -40,7 +53,7 @@ function RepoDetailPage() {
       <h1>RepoDetailPage</h1>
       {isLoading && <Spinner />}
       {error && <p>{error}</p>}
-      <RepoCard repo={repoDetails} />
+      <RepoCard repo={repoDetails} commitsLast={commits} />
     </div>
   );
 }
