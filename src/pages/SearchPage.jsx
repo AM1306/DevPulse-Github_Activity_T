@@ -10,7 +10,6 @@ function SearchPage() {
   const [error, setError] = useState(null);
 
   //Browser History
-  //1.Intialize state from localStorage
   const [history, setHistory] = useState(() => {
     try {
       const saved = localStorage.getItem("recentUsernames");
@@ -21,7 +20,6 @@ function SearchPage() {
     }
   });
 
-  //2.Sync to localStorage whenever "history" state changes
   useEffect(() => {
     localStorage.setItem("recentUsernames", JSON.stringify(history));
   }, [history]);
@@ -43,7 +41,7 @@ function SearchPage() {
         setError("User not found.Please check the username.");
         return;
       }
-      //saving username on successful search
+
       setHistory((prev) => {
         const updated = [username, ...prev.filter((u) => u !== username)];
         if (updated.length > 5) {
@@ -61,35 +59,46 @@ function SearchPage() {
   }
 
   return (
-    <>
-      <h1>SearchPage</h1>
-      <Link to="/favourites">Favourites</Link>
+    <div className="searchPage">
+      <h1>DEVPULSE</h1>
+      <h2>GitHub Activity Tracker</h2>
+      <Link to="/favourites" className="favouriteLink">
+        Favourites
+      </Link>
       <br />
 
-      <div className="searchBar">
+      {/* Main Search wrapper container */}
+      <div className="searchContainer">
+        <div className="searchBar">
+          <input
+            type="text"
+            placeholder="Type Github username"
+            onChange={handleUsername}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch();
+            }}
+          />
+          <button onClick={handleSearch}>SEARCH PROFILE</button>
+        </div>
+
+        {/* Moved recent searches below the input bar */}
         {history.length > 0 && (
           <div className="searchHistory">
             <p>Recent Searches:</p>
-            {history.map((user) => (
-              <button key={user} onClick={() => navigate(`/user/${user}`)}>
-                {user}
-              </button>
-            ))}
+            <div className="historyTags">
+              {history.map((user) => (
+                <button key={user} onClick={() => navigate(`/user/${user}`)}>
+                  {user}
+                </button>
+              ))}
+            </div>
           </div>
         )}
-        <input
-          type="text"
-          placeholder="Type Github username"
-          onChange={handleUsername}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleSearch();
-          }}
-        ></input>
-        <button onClick={handleSearch}>SEARCH PROFILE</button>
       </div>
+
       {isLoading && <Spinner />}
       {error && <p className="error">{error}</p>}
-    </>
+    </div>
   );
 }
 

@@ -1,21 +1,113 @@
-.searchBar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
+.searchPage {
+  min-height: 100vh;
+  background-color: #121212;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 80px;
 }
-input{
-    display: flex;
-    flex: 1;
-    max-width: 700px ;
-    height: 30px;
+
+.searchPage h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
-button{
-    height: 36px;
+
+.searchPage h2 {
+  color: #b3b3b3;
+  font-weight: 400;
+  margin-bottom: 2rem;
 }
-.error{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: aqua;
+
+.favouriteLink {
+  color: #61dafb;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: opacity 0.2s ease;
+}
+
+.favouriteLink:hover {
+  opacity: 0.8;
+}
+
+.searchContainer {
+  width: 90%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.searchBar {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.searchBar input {
+  flex: 1;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1f1f1f;
+  color: white;
+  font-size: 1rem;
+}
+
+.searchBar button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: #61dafb;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.searchBar button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.searchHistory {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.searchHistory p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+.historyTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.searchHistory button {
+  background-color: #1f1f1f;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.searchHistory button:hover {
+  background-color: #2c2c2c;
+  border-color: #555;
 }
