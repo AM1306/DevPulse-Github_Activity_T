@@ -2,39 +2,31 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import RepoCard from "../components/RepoCard";
 import Spinner from "../components/spinner";
+import useFetch from "../hooks/useFetch";
 
 function RepoDetailPage() {
   const { username, reponame } = useParams();
-  const [repoDetails, setRepoDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [commits, setCommits] = useState([]);
   const [readme, setReadme] = useState("");
+  const [fetchError, setFetchError] = useState(null);
   const navigate = useNavigate();
+
+  //using the useFetch hook
+  const {
+    data: repoDetails,
+    isLoading,
+    error,
+  } = useFetch(`https://api.github.com/repos/${username}/${reponame}`);
 
   useEffect(() => {
     async function FetchRepoData() {
-      setIsLoading(true);
-      setError(null);
-
       try {
-        const repoRes = await fetch(
-          `https://api.github.com/repos/${username}/${reponame}`,
-        );
-        if (!repoRes.ok) {
-          setError(`Response Status: ${repoRes.status}`);
-          return;
-        }
-        const repoData = await repoRes.json();
-        console.log(repoData);
-        setRepoDetails(repoData);
-
         //Last 5 commits
         const commitsInfo = await fetch(
           `https://api.github.com/repos/${username}/${reponame}/commits`,
         );
         if (!commitsInfo.ok) {
-          setError(`Response Error: ${commitsInfo.status}`);
+          setFetchError(`Response Error: ${commitsInfo.status}`);
           return;
         }
         const commitsRes = await commitsInfo.json();
@@ -54,9 +46,7 @@ function RepoDetailPage() {
         }
       } catch (err) {
         console.error(err);
-        setError("Something went wrong");
-      } finally {
-        setIsLoading(false);
+        setFetchError("Something went wrong");
       }
     }
     FetchRepoData();
@@ -67,6 +57,7 @@ function RepoDetailPage() {
       <h1>RepoDetailPage</h1>
       {isLoading && <Spinner />}
       {error && <p>{error}</p>}
+      {fetchError && <p>{fetchError}</p>}
       <RepoCard repo={repoDetails} commitsLast={commits} readme={readme} />
 
       <button onClick={() => navigate(`/user/${username}`)}>

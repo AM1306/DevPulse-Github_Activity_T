@@ -26,6 +26,7 @@ function ProfilePage() {
       setFav(false);
     }
   }, [profile]);
+  
   function favPage() {
     if (!profile) return;
 

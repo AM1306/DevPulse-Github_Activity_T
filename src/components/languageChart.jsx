@@ -1,6 +1,7 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import languageColors from "../utils/languageColors";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -17,13 +18,7 @@ function LanguageChart({ languages }) {
     datasets: [
       {
         data: top5.map(([, bytes]) => bytes),
-        backgroundColor: [
-          "red",
-          "lightblue",
-          "lightpink",
-          "lightgreen",
-          "lightgrey",
-        ],
+        backgroundColor: top5.map(([lang]) => languageColors[lang] || "#ccc"),
       },
     ],
 
