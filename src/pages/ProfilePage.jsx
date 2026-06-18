@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../CSS/profilePage.css";
 import { Link, useParams } from "react-router-dom";
 import Spinner from "../components/spinner";
 import UserCard from "../components/userCard";
@@ -26,7 +27,7 @@ function ProfilePage() {
       setFav(false);
     }
   }, [profile]);
-  
+
   function favPage() {
     if (!profile) return;
 
@@ -115,30 +116,57 @@ function ProfilePage() {
   }, [username]);
 
   const buttonText = fav ? "Favourite" : "Add to favourites";
+
   return (
-    <div>
-      <h1>ProfilePage</h1>
-      <button
-        className="favPageBtn"
-        onClick={favPage}
-        style={{
-          backgroundColor: fav ? "gold" : "#ddd",
-        }}
-      >
-        {buttonText}
-      </button>
-      {isLoading && <Spinner />}
-      {error && <p className="error">{error}</p>}
-      <UserCard profile={profile} />
-      <br />
-      <div className="repoList">
-        {repo.map((r) => (
-          <div key={r.id}>
-            <Link to={`/user/${username}/repo/${r.name}`}>{r.name}</Link>
+    <div className="profilePageWrapper">
+      {" "}
+      <div className="profilePage">
+        <div className="profileHeader">
+          <h1>Developer Profile</h1>
+          <button
+            className="favPageBtn"
+            onClick={favPage}
+            style={{
+              backgroundColor: fav ? "gold" : "#ddd",
+              color: fav ? "#000" : "#333",
+            }}
+          >
+            {buttonText}
+          </button>
+        </div>
+
+        {isLoading && <Spinner />}
+        {error && <p className="error">{error}</p>}
+
+        {/* Dashboard Layout Grid */}
+        <div className="profileDashboardGrid">
+          {/* LEFT SIDE: User Info */}
+          <div className="profileCard">
+            <UserCard profile={profile} />
           </div>
-        ))}
+
+          {/* RIGHT SIDE: Repos Top & Chart Bottom */}
+          <div className="rightContentColumn">
+            <div className="repoCard">
+              <h2>Top Repositories</h2>
+              <div className="repoList">
+                {repo.map((r) => (
+                  <div key={r.id}>
+                    <Link to={`/user/${username}/repo/${r.name}`}>
+                      {r.name}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="languageCard">
+              <h2>Language Breakdown</h2>
+              <LanguageChart languages={languages} />
+            </div>
+          </div>
+        </div>
       </div>
-      <LanguageChart languages={languages} />
     </div>
   );
 }

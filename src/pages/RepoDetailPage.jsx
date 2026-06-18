@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import RepoCard from "../components/RepoCard";
 import Spinner from "../components/spinner";
 import useFetch from "../hooks/useFetch";
+import "../CSS/repoDetails.css";
 
 function RepoDetailPage() {
   const { username, reponame } = useParams();
@@ -11,7 +12,6 @@ function RepoDetailPage() {
   const [fetchError, setFetchError] = useState(null);
   const navigate = useNavigate();
 
-  //using the useFetch hook
   const {
     data: repoDetails,
     isLoading,
@@ -53,16 +53,27 @@ function RepoDetailPage() {
   }, [username, reponame]);
 
   return (
-    <div>
-      <h1>RepoDetailPage</h1>
-      {isLoading && <Spinner />}
-      {error && <p>{error}</p>}
-      {fetchError && <p>{fetchError}</p>}
-      <RepoCard repo={repoDetails} commitsLast={commits} readme={readme} />
+    <div className="repoDetailPageWrapper">
+      <div className="repoDetailPage">
+        <div className="repoDetailHeader">
+          <h1>Repository Details</h1>
+          <button
+            className="backBtn"
+            onClick={() => navigate(`/user/${username}`)}
+          >
+            &larr; Back to Profile
+          </button>
+        </div>
 
-      <button onClick={() => navigate(`/user/${username}`)}>
-        &larr; Back to Profile
-      </button>
+        {isLoading && <Spinner />}
+        {error && <p className="error">{error}</p>}
+        {fetchError && <p className="error">{fetchError}</p>}
+
+        {/* Organized Main Content Layout Container */}
+        <div className="repoDetailGrid">
+          <RepoCard repo={repoDetails} commitsLast={commits} readme={readme} />
+        </div>
+      </div>
     </div>
   );
 }
