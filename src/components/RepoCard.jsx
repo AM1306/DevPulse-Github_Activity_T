@@ -1,7 +1,7 @@
 import React from "react";
 import formatDate from "../utils/formatDate";
 
-function RepoCard({ repo, commitsLast }) {
+function RepoCard({ repo, commitsLast, readme }) {
   if (!repo) return null;
   return (
     <>
@@ -22,6 +22,9 @@ function RepoCard({ repo, commitsLast }) {
           </div>
         ))}
       </div>
+
+      <h2>README</h2>
+      <pre>{readme}</pre>
     </>
   );
 }
