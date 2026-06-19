@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/profilePage.css";
-import { Link, useParams } from "react-router-dom";
+// Added useNavigate to the import list below
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Spinner from "../components/spinner";
 import UserCard from "../components/userCard";
 import LanguageChart from "../components/languageChart";
@@ -13,6 +14,7 @@ function ProfilePage() {
   const [error, setError] = useState(null);
   const [fav, setFav] = useState(false);
   const { username } = useParams();
+  const navigate = useNavigate();
 
   //Favourite Button
   //Checking for localStorage when profile changes
@@ -123,6 +125,12 @@ function ProfilePage() {
       <div className="profilePage">
         <div className="profileHeader">
           <h1>Developer Profile</h1>
+          <button className="backBtn" onClick={() => navigate("/")}>
+            ← Back to Search
+          </button>
+
+          {/* Cleaned up the broken duplicate code snippet that was here */}
+
           <button
             className="favPageBtn"
             onClick={favPage}
