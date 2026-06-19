@@ -34,6 +34,8 @@ PAGES:
 <img width="1075" height="590" alt="image" src="https://github.com/user-attachments/assets/1debac62-2674-41e9-8dbe-b2f2944a8e7c" />
 
 #Favourites Page (/favourites): Lists all saved profiles with avatar and username. Click any to navigate to their profile, or remove them individually.
+<img width="1204" height="503" alt="image" src="https://github.com/user-attachments/assets/52f1fdb2-a157-408c-8ce8-183dcc5f4e00" />
+
 
 API Limitations
 
