@@ -1,0 +1,132 @@
+/* Full screen dark wrapper logic */
+.favPageWrapper {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #121212;
+  color: white;
+  box-sizing: border-box;
+}
+
+/* Centered layout bounding box */
+.favPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.favHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid #2d2d2d;
+  padding-bottom: 1rem;
+}
+
+.favHeader h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.backHomeLink {
+  color: #61dafb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.backHomeLink:hover {
+  opacity: 0.8;
+}
+
+/* Empty State Handling Box */
+.noFavsBox {
+  background-color: #1e1e1e;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 3rem;
+  text-align: center;
+}
+
+.noFavsBox p {
+  color: #b3b3b3;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Responsive Grid to align profile elements symmetrically */
+.favGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card container for individual favorited user items */
+.favUserCard {
+  background-color: #1e1e1e;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.favUserCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+/* Row wrapper organizing avatar picture and the login title */
+.favUserInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.favAvatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  object-fit: cover;
+}
+
+.favUserLink {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+
+.favUserLink:hover {
+  color: #61dafb;
+}
+
+/* Clean utility layout button to scrub out records */
+.removeFavBtn {
+  width: 100%;
+  background-color: #2a1b1b;
+  color: #ff9f9f;
+  border: 1px solid #4a2323;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.removeFavBtn:hover {
+  background-color: #3d1f1f;
+  border-color: #ff7373;
+  color: white;
+}
